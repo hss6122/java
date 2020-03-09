@@ -1,0 +1,74 @@
+package view;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.text.View;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.Stack;
+import java.awt.event.ActionEvent;
+
+public class startview {
+	private static JTextField tf1;
+	private static JPasswordField tf_pw;
+	
+
+	public static void main(String[] args) {
+
+		
+		JFrame f1 = new JFrame();
+		f1.setSize(700, 700);
+		f1.getContentPane().setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("로그인");
+		lblNewLabel.setBounds(303, 41, 57, 15);
+		f1.getContentPane().add(lblNewLabel);
+//----------------------------------------------- id작성
+		tf1 = new JTextField();
+		tf1.setBounds(266, 86, 116, 21);
+		f1.getContentPane().add(tf1);
+		tf1.setColumns(10);
+		
+		
+//-------------------------------------------------pw작성		
+		tf_pw = new JPasswordField();
+		// 자바 스윙에서 위 필드를 사용하면  암호입력시 *표시로 표시할 수 있도록.
+		tf_pw.setEchoChar('*');
+		//암호 입력시 * 로 가려지게함,
+		tf_pw.setBounds(266, 130, 116, 21);
+		f1.getContentPane().add(tf_pw);
+		
+		
+//		-------------------------------
+		JButton btnNewButton = new JButton("로그인버튼");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					String id = tf1.getText();
+					char[] pw1 = tf_pw.getPassword();//*표시를 해줬기에. 개별로 된  char값 배열에저장.
+					//필드에서 패스워드를 얻어와서 char[]배열에 저장
+					String pw = new String(pw1); // char을  스트링 값으로 변환 하여 DB저장될 수 있게 가공.
+					
+					ControlBox cb = new ControlBox();
+					//컨트롤박스의 멤버 메소드 호출을 위해 cd로 컨트롤 박스를 인스턴스함
+					cb.login(id, pw);
+			}
+		});
+		btnNewButton.setBounds(266, 160, 116, 23);
+		f1.getContentPane().add(btnNewButton);
+//		--------------------------------
+		JButton btnNewButton_1 = new JButton("회원가입버튼");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				signup sgin = new signup(); // signup 클래스 에 접근하기위해 sgin변수에인스턴스
+				sgin.signup(); //회원가입창 메소드
+			}
+		});
+		btnNewButton_1.setBounds(266, 207, 116, 23);
+		f1.getContentPane().add(btnNewButton_1);
+		
+		f1.setVisible(true);
+
+	}// 메인
+}
