@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import 클래스만들기.값전달;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.TextField;
@@ -99,17 +100,36 @@ public class signup {
 		JButton btnNewButton = new JButton("회원가입버튼");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				String id = tf1.getText();
 				String pw = tf2.getText();
+				String pw1 = tf3.getText();//비밀번호확인
+				if (pw == pw1) {
+					JOptionPane.showMessageDialog(null, "비밀번호 동일");
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "비밀번호가 같지 않습니다");
+				}
 				String name = tf4.getText();
 				String email = tf5.getText();
 				String tel = tf6.getText();
 				String adress = tf7.getText();
-				System.out.println("회원가입버튼ok");
 				
-				ControlBox cb = new ControlBox();
-				cb.insert(id, pw, name, email, tel, adress);
-				// 임시저장 = db.회원가입(id,pw ,등등..);
+				
+				//1. 가방을 만든다.
+				MemberDTO dto = new MemberDTO();
+				//2. 가방에 넣는다.
+				dto.setId(id);
+				dto.setPw(pw);
+				dto.setName(name);
+				dto.setEmail(email);
+				dto.setTel(tel);
+				dto.setAdress(adress);
+				//3. 어디에전달.DAO에 전달.
+				MemberDAO db = new MemberDAO();
+				//4. 가방을 꺼낸다.
+				db.insert(dto);// DAO에  보낸다.
 				
 			}
 		});

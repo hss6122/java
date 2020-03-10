@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.View;
@@ -30,8 +31,6 @@ public class startview {
 		tf1.setBounds(266, 86, 116, 21);
 		f1.getContentPane().add(tf1);
 		tf1.setColumns(10);
-		
-		
 //-------------------------------------------------pw작성		
 		tf_pw = new JPasswordField();
 		// 자바 스윙에서 위 필드를 사용하면  암호입력시 *표시로 표시할 수 있도록.
@@ -39,8 +38,6 @@ public class startview {
 		//암호 입력시 * 로 가려지게함,
 		tf_pw.setBounds(266, 130, 116, 21);
 		f1.getContentPane().add(tf_pw);
-		
-		
 //		-------------------------------
 		JButton btnNewButton = new JButton("로그인버튼");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -49,10 +46,26 @@ public class startview {
 					char[] pw1 = tf_pw.getPassword();//*표시를 해줬기에. 개별로 된  char값 배열에저장.
 					//필드에서 패스워드를 얻어와서 char[]배열에 저장
 					String pw = new String(pw1); // char을  스트링 값으로 변환 하여 DB저장될 수 있게 가공.
+					//가방을 만든다.
+					MemberDTO dto = new MemberDTO();
+					//가방에 넣음
+					dto.setId(id);
+					dto.setPw(pw);
 					
-					ControlBox cb = new ControlBox();
-					//컨트롤박스의 멤버 메소드 호출을 위해 cd로 컨트롤 박스를 인스턴스함
-					cb.login(id, pw);
+					//가방전달
+					MemberDAO dao = new MemberDAO();
+					//가방을 꺼낸다.
+					MemberDTO dto2 = dao.login(dto);
+					//null, 주소?
+					
+					if ( dto2 != null ) {//null가능성 체크. 
+						tf1.setText(dto2.getId());
+						JOptionPane.showMessageDialog(null, "회원있음");
+					}else {// null이 맞다면.
+						JOptionPane.showMessageDialog(null, "회원없음");
+					}
+					
+					
 			}
 		});
 		btnNewButton.setBounds(266, 160, 116, 23);
