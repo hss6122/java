@@ -14,6 +14,7 @@ public class MemberDAO {
 	// 각 기능마다. 들어가는 절차를 줄일 수 있는 걸 줄인다.
 	
 			//DB에 사용할 기능 선언 CRUD
+	
 			//1. C 생성 회원가입
 	public void insert(MemberDTO dto) {
 			//▲ 입력창에서 가져온 값이 dto를 거쳐 온다.
@@ -52,7 +53,7 @@ public class MemberDAO {
 	}
 	//2. r 읽기 로그인
 	public MemberDTO login(MemberDTO dto) {
-		MemberDTO dto2 = null;
+		MemberDTO dto2 = null;//가방을 비우는 초기화 후 메소드 시작.:
 		try {
 			//1.커낵터 설정
 			Class.forName(Driver);
@@ -74,14 +75,49 @@ public class MemberDAO {
 			if (rs.next()) {// 검색결과가 있는지 체크
 				System.out.println("검색결과 있음.");
 				dto2 = new MemberDTO();// if 있을때만 공간을 생성해주기.
-				String id = rs.getString(1);
+				 String id = rs.getString(1);
+				 String pw = rs.getString(2);
+				dto2.setId(id);
+				dto2.setPw(pw);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto2;// 인스턴스된 DTO2로
+	}
+	
+	
+	//3.signup id중복확인
+	public MemberDTO loginCheak(MemberDTO dto) {
+		MemberDTO dto2 = null;//가방을 비우는 초기화 후 메소드 시작.:
+		try {
+			//1.커낵터 설정
+			Class.forName(Driver);
+			System.out.println("1.커넥터 설정 ok..");
+			//2.DB연결
+			Connection con = DriverManager.getConnection(url, user, password);
+			System.out.println("2.DB연결 ok.....");
+			//3.sql문결정
+			System.out.println("3.sql문 결정ok");
+			String sql = "select id, pw from signup where id =? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getId());
+			//4.sql문전송
+			ResultSet rs = ps.executeQuery();// rs 또한 DB에서 가져오는 DTO가 될 수 있음.
+			System.out.println("4.sql문 전송");
+			if (rs.next()) {// 해당 row가 있는지 체크
+				System.out.println("검색결과 있음.");
+				dto2 = new MemberDTO();// if 있을때만 공간을 생성해주기.
+				 String id = rs.getString(1);
 				dto2.setId(id);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return dto2;
+		return dto2;// 인스턴스된 DTO2로
 	}
+	
+	
 	
 	
 	
