@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.JTextField;
+
 public class MemberDTO {
 	String id; // 매소드를 통해서 접근하도록.
 	String pw;
@@ -44,6 +46,10 @@ public class MemberDTO {
 	}
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+	public void setId(JTextField tf1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

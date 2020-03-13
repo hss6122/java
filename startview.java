@@ -60,8 +60,6 @@ public class startview {
 				// id가 없는 경우
 				// id는 있는데 비번이 다른경우>>>>>>
 				if (dto2 != null) {// null가능성 체크.
-					tf1.setText(dto2.getId());// id도 있고 id,pw가 맞을경우 성공
-					tf_pw.setText(dto2.getPw());
 					JOptionPane.showMessageDialog(null, "로그인성공");
 					// if if 문으로 null값 해결하기
 				} else {
@@ -77,7 +75,7 @@ public class startview {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Signup sgin = new Signup(); // signup 클래스 에 접근하기위해 sgin변수에인스턴스
-				sgin.Signup(); // 회원가입창 메소드
+				sgin.Signup1(); // 회원가입창 메소드
 			}
 		});
 		btnNewButton_1.setBounds(266, 207, 116, 23);

@@ -8,8 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.Checkbox;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 
 public class Signup {
@@ -23,83 +21,69 @@ public class Signup {
 //		 id,pw에 중복확인 버튼
 	
 	/**
+	 * @return 
 	 * @wbp.parser.entryPoint
 	 */
-	public void Signup() {
+	public void Signup1() {
 		
 		
 		JFrame f = new JFrame();
 		f.setSize(500, 500);
 		f.getContentPane().setLayout(null);
-		
 		tf1 = new JTextField(); //id
 		tf1.setBounds(254, 67, 116, 21);
 		f.getContentPane().add(tf1);
 		tf1.setColumns(10);
-		
 		tf2 = new JTextField(); //pw
 		tf2.setColumns(10);
 		tf2.setBounds(254, 98, 116, 21);
 		f.getContentPane().add(tf2);
-		
 		tf3 = new JTextField(); //pw again
 		tf3.setColumns(10);
 		tf3.setBounds(254, 129, 116, 21);
 		f.getContentPane().add(tf3);
-		
 		tf4 = new JTextField(); //name
 		tf4.setColumns(10);
 		tf4.setBounds(254, 160, 116, 21);
 		f.getContentPane().add(tf4);
 		f.setVisible(true);
-		
 		tf5 = new JTextField(); //email
 		tf5.setColumns(10);
 		tf5.setBounds(254, 191, 116, 21);
 		f.getContentPane().add(tf5);
-		
 		tf6 = new JTextField();	//tel
 		tf6.setColumns(10);
 		tf6.setBounds(254, 222, 116, 21);
 		f.getContentPane().add(tf6);
-		
 		tf7 = new JTextField(); //aderss
 		tf7.setColumns(10);
 		tf7.setBounds(254, 253, 116, 21);
 		f.getContentPane().add(tf7);
 		
-		JLabel lblNewLabel = new JLabel("회원가입 ");
-		lblNewLabel.setBounds(148, 27, 161, 30);
-		f.getContentPane().add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("아이디");
-		lblNewLabel_1.setBounds(148, 70, 57, 15);
-		f.getContentPane().add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_1_1 = new JLabel("비밀번호");
-		lblNewLabel_1_1.setBounds(148, 101, 57, 15);
-		f.getContentPane().add(lblNewLabel_1_1);
-		
-		
-		JLabel lblNewLabel_1_1_1 = new JLabel("비밀번호확인");
-		lblNewLabel_1_1_1.setBounds(148, 132, 94, 15);
-		f.getContentPane().add(lblNewLabel_1_1_1);
-		
-		JLabel lblNewLabel_1_1_1_2 = new JLabel("이름");
-		lblNewLabel_1_1_1_2.setBounds(148, 163, 94, 15);
-		f.getContentPane().add(lblNewLabel_1_1_1_2);
-		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("이메일");
-		lblNewLabel_1_1_1_1.setBounds(148, 194, 57, 15);
-		f.getContentPane().add(lblNewLabel_1_1_1_1);
-		
-		JLabel lblNewLabel_1_1_1_1_1 = new JLabel("핸드폰번호");
-		lblNewLabel_1_1_1_1_1.setBounds(148, 225, 72, 15);
-		f.getContentPane().add(lblNewLabel_1_1_1_1_1);
-		
-		JLabel lblNewLabel_1_1_1_1_1_1 = new JLabel("주소");
-		lblNewLabel_1_1_1_1_1_1.setBounds(148, 256, 57, 15);
-		f.getContentPane().add(lblNewLabel_1_1_1_1_1_1);
+		JLabel 회원가입 = new JLabel("회원가입 ");
+		회원가입.setBounds(148, 27, 161, 30);
+		f.getContentPane().add(회원가입);
+		JLabel 아이디 = new JLabel("아이디");
+		아이디.setBounds(148, 70, 57, 15);
+		f.getContentPane().add(아이디);
+		JLabel 비밀번호 = new JLabel("비밀번호");
+		비밀번호.setBounds(148, 101, 57, 15);
+		f.getContentPane().add(비밀번호);
+		JLabel 비밀번호확인 = new JLabel("비밀번호확인");
+		비밀번호확인.setBounds(148, 132, 94, 15);
+		f.getContentPane().add(비밀번호확인);
+		JLabel 이름 = new JLabel("이름");
+		이름.setBounds(148, 163, 94, 15);
+		f.getContentPane().add(이름);
+		JLabel 이메일 = new JLabel("이메일");
+		이메일.setBounds(148, 194, 57, 15);
+		f.getContentPane().add(이메일);
+		JLabel 핸드폰번호 = new JLabel("핸드폰번호");
+		핸드폰번호.setBounds(148, 225, 72, 15);
+		f.getContentPane().add(핸드폰번호);
+		JLabel 주소 = new JLabel("주소");
+		주소.setBounds(148, 256, 57, 15);
+		f.getContentPane().add(주소);
 //		-----------------------------------------
 		
 		JButton btnNewButton = new JButton("회원가입버튼");
@@ -181,7 +165,6 @@ public class Signup {
 			//4. 가방을 꺼낸다.
 				
 				if ( dto2 != null ) {//null가능성 체크. 
-					tf1.setText(dto2.getId());
 					JOptionPane.showMessageDialog(null, "아이디중복 다시 생성주세요");
 				}else {// null이 맞다면.
 					JOptionPane.showMessageDialog(null, "아이디사용가능");
