@@ -20,7 +20,14 @@ public class memberif {
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public static void main (String[] args) {
+	
+//	public static void main(String[] args) {// 본창만 테이트하고 싶을시 살리기
+//		new memberif();
+//	}
+	
+	
+	
+	public void MemberIf() {
 		
 		JFrame f = new JFrame();
 		f.setSize(500, 500);
@@ -58,49 +65,60 @@ public class memberif {
 		JButton 수정완료 = new JButton("수정완료");
 		수정완료.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String id = tf1.getText();
 				String pw = tf2.getText();
-				String name = tf3.getText();
-				String tel = tf4.getText();
-				String email = tf5.getText();
-				String adress = tf6.getText();
-				//가방을 만든다,
-				//가방에 넣는다.
-				//가방을 전달한다.
-				//가방을 꺼낸다.
+				if (tf2.getText().trim().length()==0) {
+					JOptionPane.showInputDialog(null, "변경할 패스워드 입력");
+				}else {
+					
+				}
 				
+//				String name = tf3.getText();
+//				String tel = tf4.getText();
+//				String email = tf5.getText();
+//				String adress = tf6.getText();
+				
+					MemberDTO dto = new MemberDTO();
+				//가방을 만든다,
+					dto.setId(id);
+					dto.setPw(pw);
+//					dto.setName(name);
+//					dto.setTel(tel);
+//					dto.setEmail(email);
+//					dto.setAdress(adress);
+				//가방에 넣는다.
+					MemberDAO db = new MemberDAO();
+				//가방을 전달한다.
+					db.Update(dto);
+				//가방을 꺼낸다.
 			}
 		});
 		수정완료.setBounds(95, 306, 97, 23);
 		f.getContentPane().add(수정완료);
-		
 		JButton 탈퇴 = new JButton("탈퇴");
 		탈퇴.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 			}
 		});
 		탈퇴.setBounds(220, 306, 97, 23);
 		f.getContentPane().add(탈퇴);
-		
 		JLabel 아이디 = new JLabel("아이디");
 		아이디.setBounds(108, 105, 57, 15);
 		f.getContentPane().add(아이디);
-		
 		JLabel 비밀번호 = new JLabel("비밀번호");
 		비밀번호.setBounds(108, 136, 57, 15);
 		f.getContentPane().add(비밀번호);
-		
 		JLabel 이름 = new JLabel("이름");
 		이름.setBounds(108, 167, 57, 15);
 		f.getContentPane().add(이름);
-		
 		JLabel 이메일 = new JLabel("이메일");
 		이메일.setBounds(108, 198, 57, 15);
 		f.getContentPane().add(이메일);
-		
 		JLabel 전화번호 = new JLabel("전화번호");
 		전화번호.setBounds(108, 229, 57, 15);
 		f.getContentPane().add(전화번호);
-		
 		JLabel 주소 = new JLabel("주소");
 		주소.setBounds(108, 260, 57, 15);
 		f.getContentPane().add(주소);
@@ -109,6 +127,12 @@ public class memberif {
 		회원정보불러오기.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String id = tf1.getText();// 아이디 입력필드 값을 스트링 타입으로 id 변수 지정
+					if (tf1.getText().trim().length()!=0) {
+						tf1.setEditable(false);//변경 처리 못하게 막음.
+					}else {
+						
+					}
+				
 				//가방만든다
 				MemberDTO dto = new MemberDTO(); // 가방을 인스턴스한다.
 				//가방 넣는다.
@@ -117,9 +141,6 @@ public class memberif {
 				MemberDAO dao = new MemberDAO();// 가방을 전달 위해 DAO를 인스턴스한다.
 				//가방꺼낸다.
 				MemberDTO dto2= dao.CheckIf(dto); //  DB에서 가져온 값을 꺼낸다.
-				
-				
-				
 				if (dto2 != null) {// DAO절차를 거친 후 해당 정보의 값이 있다면. 
 					System.out.println("정보잇음");
 					tf1.setText(dto2.id);// id필드에 dto2의 id값을 보낸다.
@@ -131,7 +152,6 @@ public class memberif {
 				}else {
 					JOptionPane.showMessageDialog(null, "정보없음");
 				}
-				
 			}
 		});
 		회원정보불러오기.setBounds(12, 52, 129, 23);

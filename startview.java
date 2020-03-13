@@ -8,7 +8,6 @@ import javax.swing.JTextField;
 import javax.swing.text.View;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.Stack;
 import java.awt.event.ActionEvent;
 
 public class startview {
@@ -49,18 +48,16 @@ public class startview {
 				// 가방에 넣음
 				dto.setId(id);
 				dto.setPw(pw);
-
 				// 가방전달
 				MemberDAO dao = new MemberDAO();
 				// 가방을 꺼낸다.
 				MemberDTO dto2 = dao.login(dto);
-
-				// 로그인 확인조건
-				// id && pw true >>>>>>>>>> 성공
-				// id가 없는 경우
-				// id는 있는데 비번이 다른경우>>>>>>
 				if (dto2 != null) {// null가능성 체크.
 					JOptionPane.showMessageDialog(null, "로그인성공");
+						memberif if1 = new memberif();// 회원정보고 클래스 인스턴스함.
+						if1.MemberIf();// 회원정보창 메소드
+						
+						
 					// if if 문으로 null값 해결하기
 				} else {
 					JOptionPane.showMessageDialog(null, "로그인 실패");

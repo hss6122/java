@@ -109,7 +109,7 @@ public class MemberDAO {
 		}
 		return dto2;// 인스턴스된 DTO2로
 	}
-	//3. u 회원정보검색
+	//4. u 회원정보검색
 	public MemberDTO CheckIf(MemberDTO dto) {// 패키지에 접근 가능 어래이 리스트 타입으로 가방은DTO 
 		MemberDTO dto2 = null;
 		//1.커낵터 설정
@@ -142,7 +142,7 @@ public class MemberDAO {
 				 String email = rs.getString(4);
 				 String tel = rs.getString(5);
 				 String adress = rs.getString(6);
-				 dto2 = new MemberDTO();
+				 dto2 = new MemberDTO();//있을때만 공간을 생성해주기.
 				 dto2.setId(id);
 				 dto2.setPw(pw);
 				 dto2.setName(name);
@@ -157,7 +157,7 @@ public class MemberDAO {
 	}
 	
 	
-	//4. d 회원정보삭제
+	//5. d 회원정보삭제
 	public int delete(MemberDTO dto) {//<
 		System.out.println("회원탈퇴 처리하다.");
 		int result = 0; //회원탈되  안된 경우
@@ -191,6 +191,32 @@ public class MemberDAO {
 		}
 			return result;
 	}
+	//6. 회정 정보 수정
+	public void Update(MemberDTO dto) {
+		int result =0;//업데이트가 안된경우. 
+		try {
+			//DB 커넥터 설정
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("1,커넥터 설정ok...");
+			//DB연결
+			Connection con = DriverManager.getConnection(url, user, password);
+			System.out.println("2.DB연결 ok.....");
+			//sql문결정
+			String sql = "update signup set pw =? where id =?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, dto.getPw()); 
+			ps.setString(2, dto.getId()); 
+			System.out.println("3.sql문 결정ok");
+			
+			//sql문 전송
+			ps.executeUpdate();
+			System.out.println("4.sql문 전송");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
 	
-	
-}
+}// 클레스
