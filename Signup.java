@@ -20,11 +20,7 @@ public class Signup {
 	private JTextField tf4;
 //		 id,pw에 중복확인 버튼
 	
-	/**
-	 * @return 
-	 * @wbp.parser.entryPoint
-	 */
-	public void Signup1() {
+		public void Signup1() {
 		
 		
 		JFrame f = new JFrame();
@@ -100,7 +96,7 @@ public class Signup {
 				if (tf2.getText().trim().length()==0) {
 					JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요");
 					return;
-				}String pw1 = tf3.getText();//비밀번호확인
+				}String pw11 = tf3.getText();//비밀번호확인
 				if (tf2.getText().trim().equals(tf3.getText().trim())) {//같다면 bool값
 					JOptionPane.showMessageDialog(null, "비밀번호가 동일. 사용가능");
 				}else {
@@ -143,8 +139,6 @@ public class Signup {
 				//4. 가방을 꺼낸다.
 				db.insert(dto);// DAO에  보낸다.
 				JOptionPane.showMessageDialog(null, "회원가입완료");
-				
-				
 			}
 		});
 		btnNewButton.setBounds(188, 329, 121, 23);
@@ -169,8 +163,6 @@ public class Signup {
 				}else {// null이 맞다면.
 					JOptionPane.showMessageDialog(null, "아이디사용가능");
 				}
-				
-			
 			}
 		});
 		btnNewButton_1.setBounds(375, 66, 97, 23);

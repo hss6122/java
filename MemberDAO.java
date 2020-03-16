@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -54,6 +53,7 @@ public class MemberDAO {
 		try {
 			//1.커낵터 설정
 			Class.forName(Driver);
+			System.out.println("login 메소드 실행");
 			System.out.println("1.커넥터 설정 ok..");
 			//2.DB연결
 			Connection con = DriverManager.getConnection(url, user, password);
@@ -119,6 +119,7 @@ public class MemberDAO {
 		
 		try {
 			// 1 커넥터 설정
+			System.out.println("회원정보검색 CheckIf DAO문 실행");
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("1.커넥터 설정 ok..");
 			// 2  DB연결
@@ -171,9 +172,10 @@ public class MemberDAO {
 			System.out.println("2.DB연결 ok.....");
 			
 			// 3 sql문 결정
-			String sql = "delete from member where id = ? ";
+			String sql = "delete from signup where id = ? && pw = ? ";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getId()); //?를 받아줌.
+			ps.setString(2, dto.getPw()); //?를 받아줌.
 			
 			// 전송 △
 			System.out.println("3.sql문 결정 ok");
@@ -184,16 +186,20 @@ public class MemberDAO {
 			System.out.println("삭제요청 결과는"+result);
 			//반환값 1개는 1개의 회원정보 dto를 삭제했는지. 표기
 			System.out.println("4.sql문 전송");
+			if (result == 0) {
+				JOptionPane.showMessageDialog(null, "비밀번호가 다릅니다");
+			}else {
+				JOptionPane.showMessageDialog(null, "회원탈퇴 되었습니다");
+				
+			}
 			
 		} catch (Exception e) {//예외.  
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			return result;
 	}
 	//6. 회정 정보 수정
 	public void Update(MemberDTO dto) {
-		int result =0;//업데이트가 안된경우. 
 		try {
 			//DB 커넥터 설정
 			Class.forName("com.mysql.jdbc.Driver");

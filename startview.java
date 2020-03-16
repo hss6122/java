@@ -10,12 +10,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
 public class startview {
+	static String loginkey;// 로그인 id를 다른 클래스에서 사용 할 수 있도록 스태틱지정
 	private static JTextField tf1;
 	private static JPasswordField tf_pw;
-
 	public static void main(String[] args) {
-
+		
 		JFrame f1 = new JFrame();
 		f1.setSize(700, 700);
 		f1.getContentPane().setLayout(null);
@@ -39,7 +40,7 @@ public class startview {
 		JButton btnNewButton = new JButton("로그인버튼");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String id = tf1.getText();
+				 String id = tf1.getText();
 				char[] pw1 = tf_pw.getPassword();// *표시를 해줬기에. 개별로 된 char값 배열에저장.
 				// 필드에서 패스워드를 얻어와서 char[]배열에 저장
 				String pw = new String(pw1); // char을 스트링 값으로 변환 하여 DB저장될 수 있게 가공.
@@ -55,8 +56,8 @@ public class startview {
 				if (dto2 != null) {// null가능성 체크.
 					JOptionPane.showMessageDialog(null, "로그인성공");
 						memberif if1 = new memberif();// 회원정보고 클래스 인스턴스함.
+						loginkey = id;// 로그인 id값을 키값으로 지정
 						if1.MemberIf();// 회원정보창 메소드
-						
 						
 					// if if 문으로 null값 해결하기
 				} else {
