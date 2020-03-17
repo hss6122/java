@@ -139,8 +139,8 @@ public class Signup {
 				//4. 가방을 꺼낸다.
 				db.insert(dto);// DAO에  보낸다.
 				JOptionPane.showMessageDialog(null, "회원가입완료");
-			}
-		});
+				}
+				});
 		btnNewButton.setBounds(188, 329, 121, 23);
 		f.getContentPane().add(btnNewButton);
 //		-----------------------------------------------
@@ -159,12 +159,12 @@ public class Signup {
 			//4. 가방을 꺼낸다.
 				
 				if ( dto2 != null ) {//null가능성 체크. 
-					JOptionPane.showMessageDialog(null, "아이디중복 다시 생성주세요");
+					JOptionPane.showMessageDialog(null, "아이디 중복 다시 생성주세요");
 				}else {// null이 맞다면.
 					JOptionPane.showMessageDialog(null, "아이디사용가능");
 				}
-			}
-		});
+				}
+				});
 		btnNewButton_1.setBounds(375, 66, 97, 23);
 		f.getContentPane().add(btnNewButton_1);
 		

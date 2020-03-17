@@ -1,7 +1,7 @@
 package view;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;import javax.naming.spi.DirStateFactory.Result;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,15 +16,10 @@ public class memberif {
 	private static JTextField tf4;
 	private static JTextField tf5;
 	private static JTextField tf6;
-	
-	
 //회원정보수정창
 //로그인에 성공한 id로 우선 스키마를 띄어온다.
 //	public static void main(String[] args) {// 본창만 테이트하고 싶을시 살리기
 //		new memberif();
-	
-	
-	
 	public void MemberIf() {
 		
 		JFrame f = new JFrame();
@@ -63,8 +58,6 @@ public class memberif {
 		tf1.setBounds(201, 102, 116, 21);
 		f.getContentPane().add(tf1);
 		tf1.setColumns(10);
-		
-		
 		tf2.setColumns(10);
 		tf2.setBounds(201, 133, 116, 21); 
 		f.getContentPane().add(tf2);
@@ -80,7 +73,7 @@ public class memberif {
 		tf6.setColumns(10);
 		tf6.setBounds(201, 257, 116, 21);
 		f.getContentPane().add(tf6);
-		
+//		--------------------------------------------------------
 		JButton 수정완료 = new JButton("수정완료");
 		수정완료.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,11 +97,11 @@ public class memberif {
 					db.Update(dto);
 					JOptionPane.showMessageDialog(null,"회원정보 수정완료");
 				//가방을 꺼낸다.
-					
-			}
-		});
+				}
+				});
 		수정완료.setBounds(95, 306, 97, 23);
 		f.getContentPane().add(수정완료);
+//		--------------------------------------------------------------
 		JButton 탈퇴 = new JButton("탈퇴");
 		탈퇴.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -123,11 +116,8 @@ public class memberif {
 				//가방을 전달
 				dao.delete(dto);
 				//가방을 꺼낸다.
-				
-				
-				
-			}
-		});
+				}
+				});
 		탈퇴.setBounds(220, 306, 97, 23);
 		f.getContentPane().add(탈퇴);
 		JLabel 아이디 = new JLabel("아이디");
@@ -148,7 +138,6 @@ public class memberif {
 		JLabel 주소 = new JLabel("주소");
 		주소.setBounds(108, 260, 57, 15);
 		f.getContentPane().add(주소);
-	
 		f.setVisible(true);
 	}//메인
 }
