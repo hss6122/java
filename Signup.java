@@ -147,17 +147,15 @@ public class Signup {
 		JButton btnNewButton_1 = new JButton("id중복확인");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String id = tf1.getText();
-				
+				String id = tf1.getText();//id필드에서 값을 가져와서 스트링 타입 id 대입한다.
 				MemberDTO dto = new MemberDTO();
-			//1.가방을 만든다.
+				//1.가방을 만든다.
 				dto.setId(id);
-			//2.가방에 넣는다.
+				//2.가방에 넣는다.
 				MemberDAO dao = new MemberDAO();
-			//3. 가방을 전달
-				MemberDTO dto2 = dao.loginCheak(dto);
-			//4. 가방을 꺼낸다.
-				
+				//3. 가방을 전달
+				MemberDTO dto2 = dao.loginCheak(dto);// DAO의 loginCheak메소드에 dto 값을 넣어 호출한다. 호출 후 값은 dto2에 대입된다.
+				//4. 가방을 꺼낸다.
 				if ( dto2 != null ) {//null가능성 체크. 
 					JOptionPane.showMessageDialog(null, "아이디 중복 다시 생성주세요");
 				}else {// null이 맞다면.

@@ -103,8 +103,9 @@ public class MemberDAO {
 			}
 //	3. id중복확인
 	public MemberDTO loginCheak(MemberDTO dto) {
-		MemberDTO dto2 = null;//가방을 비우는 초기화 후 메소드 시작.:
-		try {
+		// △ 반환은 DTO에 한다. 입력값은 DTO클래스이다.
+		MemberDTO dto2 = null;//가방을 비우는 초기화 후 메소드 시작.://쓰레기 값 초기화
+		try {// Exception 발생시 괄호안은 무시하고 절차에 따라 실행한다
 			//1.커낵터 설정
 			Class.forName(Driver);
 			System.out.println("1.커넥터 설정 ok..");
@@ -113,7 +114,7 @@ public class MemberDAO {
 			System.out.println("2.DB연결 ok.....");
 			//3.sql문결정
 			System.out.println("3.sql문 결정ok");
-			String sql = "select id from signup where id =? ";
+			String sql = "select id from signup where id =? ";// signup 테이블에 id칼럼에  입력값 id를 검색하라
 			ps = con.prepareStatement(sql);
 			ps.setString(1, dto.getId());
 			//4.sql문전송

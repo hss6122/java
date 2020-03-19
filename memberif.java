@@ -20,7 +20,7 @@ public class memberif {
 //로그인에 성공한 id로 우선 스키마를 띄어온다.
 //	public static void main(String[] args) {// 본창만 테이트하고 싶을시 살리기
 //		new memberif();
-	public void MemberIf() {
+	public void MemberIf() {//디폴트 생성자.
 		
 		JFrame f = new JFrame();
 		f.setSize(500, 500);
@@ -29,7 +29,7 @@ public class memberif {
 		JLabel 회원정보수정 = new JLabel("회원정보수정");
 		회원정보수정.setBounds(12, 10, 87, 31);
 		f.getContentPane().add(회원정보수정);
-		System.out.println("해당 id는"+startview.loginkey);// 로그인창 id값을 받아온다.
+		System.out.println("해당 id는"+startview.loginkey);//스태틱 값으로 지정해둔. ID를 접근하여 출력
 		//가방을 만든다.
 		MemberDTO dto = new MemberDTO();
 		//가방에 넣는다.
@@ -43,7 +43,8 @@ public class memberif {
 		 tf4 = new JTextField();//이메일
 		 tf5 = new JTextField();//전화번호
 		 tf6 = new JTextField(); // 주소
-		 MemberDTO dto2 =dao.CheckIf(dto);
+		 MemberDTO dto2 =dao.CheckIf(dto);//DAO클래스의 CheckIf메소드 입력값은 스태틱 id값이고
+		 //이를 dto2에 대입한다.
 				if (dto2 != null) {
 					tf1.setText(dto2.id);
 					if (tf1.getText().trim().length()!=0) {
