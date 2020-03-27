@@ -1,0 +1,38 @@
+@charset "UTF-8";
+#button{
+	background: green;
+	color: white;
+	font-size: 25px;
+	border-color: yellow;
+	
+}
+.c1{
+	text-align: center;
+	background: pink;
+}
+
+.c2{
+	width: 300px;
+	text-align: center;
+	background: red;
+	
+}
+
+body{
+	color: blue;
+	
+}
+h1{
+	
+	text-align: center;
+	color: red;
+	font-style: italic;
+	font-weight: bold;
+	border-style: dotted;
+	border-color: lime;
+	border-width: 5px;
+	border-color: lime;
+	background: yellow;
+	box-shadow: 
+	
+}
