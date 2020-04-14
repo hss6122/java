@@ -1,3 +1,5 @@
+<%@page import="java.io.Console"%>
+<%@page import="javafx.scene.control.Alert"%>
 <%@page import="bean.PlaceMemberDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="bean.MemberDAO"%>
@@ -8,59 +10,101 @@
 <head>
 <meta charset="UTF-8">
 <title>오프라인 장터 자리 예약.</title>
-<link rel="stylesheet" type="text/css" href="../css/shop.css">
+
  <script type="text/javascript">
- function showPopup() {window.open("08_2_popup.html", "a", "width=400, height=300, left=100, top=50"); }
+ function showPopup_T() {window.open("popup_T.jsp", "a", "width=400, height=300, left=100, top=50"); }
+ function showPopup_F() {window.open("popup_F.jsp", "a", "width=400, height=300, left=100, top=50"); }
  </script>
+<link rel="stylesheet" type="text/css" href="./css/shop.css">
 </head>
-	<body>
+<body>
+	<div id="total">배경이미지
 	
-	
+	</div>
 	<%
 	MemberDAO dao = new MemberDAO();
-	ArrayList<PlaceMemberDTO> list = dao.list();
-	
+	ArrayList<String> list = dao.seatcheck();
+	String seat = (String)list.get(0);
+	String[] seatlist = seat.split("#");
 	%>
-	
 	<table border="1">
 	<tr>
-	<td width="100">판매자 id</td> 
-	<td width="100">자리.NO</td> 
-	<td width="100">제목</td> 
-	<td width="100">카테고리</td> 
-	<td width="100">가격</td> 
-	<td width="100">내용</td> 
-	<td width="100">포토 준비중</td> 
-	<td width="100">판매여부</td> 
-	<td width="100">상품판매등록번호</td> 
-	<td width="100">상품코드</td> 
-	<td width="100">오프라인자리예약가능여부</td> 
-	</tr>
 	<%
-	for(PlaceMemberDTO x : list){
-	%>
-	<tr>	
-		<td><%= x.getId() %></td>
-		<td><%= x.getSeatdayno() %></td>
-		<td><%= x.getTitle() %></td>
-		<td><%= x.getCategory() %></td>
-		<td><%= x.getPrice() %></td>
-		<td><%= x.getContents() %></td>
-		<td><%= x.getPhoto() %></td>
-		<td><%= x.getSale() %></td>
-		<td><%= x.getItemnum() %></td>
-		<td><%= x.getItemcode() %></td>
-		<td>
-		<a href="selection.jsp?id=<%= x.getSeatok() %>" onclick="showPopup();">
+	for(int i = 1 ; i < 6; i++){
 		
-		<%= x.getSeatok() %>
-		</a>
-		</td>
+		if(seatlist[i].equals("1")){
+		%>
+			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();">
+			 <%= i  %> <%= ": 번자리" %> 예약불가</td>
+			 
+			<% 
+		}else{
+			%>
+			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();">
+			 <%= i %> <%= ": 번자리" %> 예약가능 </td>
+			
+			<%
+			}
+			}
+			%>
 	
+	<tr>
+	<%
+	for(int i = 6 ; i < 11; i++){
+		
+		if(seatlist[i].equals("1")){
+		%>
+			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();"> 
+			<%= i  %> <%= ": 번자리" %> 예약불가</td>
+			<% 
+		}else{
+			%>
+			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();">
+			<%= i %> <%= ": 번자리" %> 예약가능 </td>
+			<%
+			}
+			}
+			%>
+	
+	<tr>
+	<%
+	for(int i = 11 ; i < 16; i++){
+		
+		if(seatlist[i].equals("1")){
+		%>
+			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();">
+			 <%= i  %> <%= ": 번자리" %> 예약불가</td>
+			<% 
+		}else{
+			%>
+			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();">
+			 <%= i %> <%= ": 번자리" %> 예약가능 </td>
+			<%
+			}
+			}
+			%>
+		
+	<tr>
+	<%
+	for(int i = 16 ; i < 21; i++){
+		
+		if(seatlist[i].equals("1")){
+		%>
+			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();"> 
+			<%= i  %> <%= ": 번자리" %> 예약불가</td>
+			<% 
+		}else{
+			%>
+			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();"> 
+			<%= i %> <%= ": 번자리" %> 예약가능 </td>
+			<%
+			}
+			}
+			%>
 	</tr>
-	<% 
-	}
-	%>
 	</table>
+	첫번쨰자리 <%= seatlist[1] %>
+	세번쨰자리 <%= seatlist[3] %>
+	
 	</body>
 </html>

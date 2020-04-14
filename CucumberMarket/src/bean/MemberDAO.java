@@ -17,34 +17,59 @@ public class MemberDAO { //메서드 단위로 만듬.
 	
 	
 	
-//	0.장터자리예약하기
-	public void selection(PlaceMemberDTO dto) {
-		System.out.println("회원수정 처리하다.");
-		try {
+	public ArrayList<String> seatcheck() {
+		ArrayList<String> list = new ArrayList<String>();
+		try { 
 			con = mgr.getConnection();
 			// 3 sql문 결정
-			
-			String no = dto.seatdayno;
-			String ok = dto.seatok;
-			
-			String sql = "update member set column3 =? where column1 =?";
+			String sql = "select * from place ";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, no);  // column3	DB부분만 1부터 시작하는 인덱스임. 특이사항.
-			ps.setString(2, ok); //column1
-			// 전송 △
 			System.out.println("3.sql문 결정 ok");
 			
 			// 4 sql문 전송
-			ps.executeUpdate();
+			ResultSet rs = ps.executeQuery();// CRUD R만 쿼리
+			
 			System.out.println("4.sql문 전송");
+			if (rs.next()) {// 검색 결과가 있는지 체크해주는 메서드.
+				 String date = rs.getString(1);//id
+				 String num1 = rs.getString(2);//id
+				 String num2 = rs.getString(3);//id
+				 String num3 = rs.getString(4);//id
+				 String num4 = rs.getString(5);//id
+				 String num5 = rs.getString(6);//id
+				 String num6 = rs.getString(7);//id
+				 String num7 = rs.getString(8);//id
+				 String num8 = rs.getString(9);//id
+				 String num9 = rs.getString(10);//id
+				 String num10 = rs.getString(11);//id
+				 String num11 = rs.getString(12);//id
+				 String num12 = rs.getString(13);//id
+				 String num13 = rs.getString(14);//id
+				 String num14 = rs.getString(15);//id
+				 String num15 = rs.getString(16);//id
+				 String num16 = rs.getString(17);//id
+				 String num17 = rs.getString(18);//id
+				 String num18 = rs.getString(19);//id
+				 String num19 = rs.getString(20);//id
+				 String num20 = rs.getString(21);//id
+				 list.add(date+"#"+num1+"#"+num2+"#"+num3+"#"+num4+"#"+num5+"#"+num6
+						 +"#"+num7+"#"+num8+"#"+num9+"#"+num10+"#"+
+						 num11+"#"+num12+"#"+num13+"#"+num14+"#"+num15+"#"+num16
+						 +"#"+num17+"#"+num18+"#"+num19+"#"+num20);
+						 
+				 
+				 System.out.println("검색결과 있어요!!");
+			
+			}
 			mgr.freeConnection(con, ps);
 			
 		} catch (Exception e) {//예외.  
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return list;
 	}
+	
 	
 	
 	
@@ -107,15 +132,15 @@ public class MemberDAO { //메서드 단위로 만듬.
 	
 	
 	
-	public int idOver(MemberDTO dto) {//id중복체크
+	public int idOver(PlaceMemberDTO dto) {//id중복체크
 		int result = 0; // 없다
 	 System.out.println("로그인 처리");
 	 	try {// 
 	 		con = mgr.getConnection();
 				// 3 sql문 결정
-				String sql = "select id from member where id = ?";
+				String sql = "select id from place where seatok = ?";
 				PreparedStatement ps = con.prepareStatement(sql);
-				ps.setString(1, dto.getId());
+				ps.setString(1, dto.getSeatok());
 				
 				// 4 sql문 전송
 				ResultSet rs = ps.executeQuery();
@@ -188,19 +213,18 @@ public class MemberDAO { //메서드 단위로 만듬.
 	
 	
 //	0.회원정보수정
-	public void update(MemberDTO dto) {
-		System.out.println("회원수정 처리하다.");
+	public ArrayList<String> update() {
+		ArrayList<String> list = new ArrayList<String>();
+		System.out.println("예약을 취소하다");
 		try {
 			con = mgr.getConnection();
+			
+			String f = "1";
+			
 			// 3 sql문 결정
-			
-			String tel = JOptionPane.showInputDialog("수정할  tel");
-			String id = JOptionPane.showInputDialog("대상 id>>");
-			
-			String sql = "update member set column3 =? where column1 =?";
+			String sql = "update place set seatnum1 ='0' where seatnum1 = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, tel);  // column3	DB부분만 1부터 시작하는 인덱스임. 특이사항.
-			ps.setString(2, id); //column1
+			ps.setString(1, f); //?를 받아줌.
 			// 전송 △
 			System.out.println("3.sql문 결정 ok");
 			
@@ -213,13 +237,20 @@ public class MemberDAO { //메서드 단위로 만듬.
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return list;
 	}
 	
 	
 
 	
-//1. 회원가입
+private void setString(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	//1. 회원가입
 	public void insert(MemberDTO dto) {
 		//매개변수(파라메터,parameter 지역변수 
 		System.out.println("회원가입처리하다.");

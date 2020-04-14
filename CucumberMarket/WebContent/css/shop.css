@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+#total{
+   background-image: url(../img/place.png);
+   background-position: center;
+   width: 800px;
+   height: 800px;
+   margin-left: 100px;
+   margin-right: 100px;
+}
+   
+         
