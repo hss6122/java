@@ -9,6 +9,7 @@ public class MemberDTO {
 	String email;
 	String tel;
 	String Interest;
+	String sellplace;
 	public String getId() {
 		return id;
 	}
@@ -57,10 +58,16 @@ public class MemberDTO {
 	public void setInterest(String interest) {
 		Interest = interest;
 	}
+	public String getSellplace() {
+		return sellplace;
+	}
+	public void setSellplace(String sellplace) {
+		this.sellplace = sellplace;
+	}
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", birth=" + birth + ", gender=" + gender
-				+ ", email=" + email + ", tel=" + tel + ", Interest=" + Interest + "]";
+				+ ", email=" + email + ", tel=" + tel + ", Interest=" + Interest + ", sellplace=" + sellplace + "]";
 	}
 	
 	

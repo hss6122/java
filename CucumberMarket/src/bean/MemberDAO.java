@@ -10,13 +10,9 @@ import javax.swing.JOptionPane;
 public class MemberDAO { //메서드 단위로 만듬.
 	Connection con;
 	DBConnectionMgr mgr;
-	
 	public MemberDAO() {
 		 mgr = DBConnectionMgr.getInstance();
 	}
-	
-	
-	
 	public ArrayList<String> seatcheck() {
 		ArrayList<String> list = new ArrayList<String>();
 		try { 
@@ -71,21 +67,56 @@ public class MemberDAO { //메서드 단위로 만듬.
 	}
 	
 	
+
+	//전체검색을 할 예정 테스트 
+	public ArrayList< PlaceMemberDTO2_test> list1() {
+	ArrayList<PlaceMemberDTO2_test> list = new ArrayList<PlaceMemberDTO2_test>();
+		try {// 
+			con = mgr.getConnection();
+			
+			// 3 sql문 결정
+			String sql = "select * from place_1";
+			PreparedStatement ps = con.prepareStatement(sql);
+			System.out.println("3.sql문 결정 ok");
+			
+			// 4 sql문 전송
+			ResultSet rs = ps.executeQuery();// CRUD R만 쿼리
+			System.out.println("4.sql문 전송");
+			
+			while (rs.next()) {// 검색 결과가 있는지 체크해주는 메서드.
+				System.out.println("검색결과 있어요!!");
+				 String id = rs.getString(1);
+				 String seatnum = rs.getString(2);
+				 String seatnumber = rs.getString(3);
+				 PlaceMemberDTO2_test dto = new PlaceMemberDTO2_test();
+				 dto.setId(id);
+				 dto.setSeatnum(seatnum);
+				 dto.setSeatnumber(seatnumber);
+				 list.add(dto);
+			}
+			mgr.freeConnection(con, ps, rs);
+		} catch (Exception e) {//예외.  
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;// 트라이 밖으로. list를 인식할 수 있음.
+		
+	}
 	
 	
 	
 	
 	
 	//전체검색을 할 예정. 
-	public ArrayList<PlaceMemberDTO> list() {
+	public ArrayList<PlaceMemberDTO2_test> list() {
 		//(결과값은 멤머 dto가들어간 어래이 리스트이다)
-		ArrayList<PlaceMemberDTO> list = new ArrayList<PlaceMemberDTO>();
-		PlaceMemberDTO dto2 = null;// 초기화를 해줌.
+		ArrayList<PlaceMemberDTO2_test> list = new ArrayList<PlaceMemberDTO2_test>();
+		PlaceMemberDTO2_test dto2 = null;// 초기화를 해줌.
 		try {// 
 			con = mgr.getConnection();
 			
 			// 3 sql문 결정
-			String sql = "select * from place";
+			String sql = "select * from place_1";
 			PreparedStatement ps = con.prepareStatement(sql);
 			System.out.println("3.sql문 결정 ok");
 			
@@ -96,28 +127,10 @@ public class MemberDAO { //메서드 단위로 만듬.
 			while (rs.next()) {// 검색 결과가 있는지 체크해주는 메서드.
 				System.out.println("검색결과 있어요!!");
 				 String id = rs.getString(1);//id
-				 String seatdayno = rs.getString(2);//id
-				 String title = rs.getString(3);//id
-				 String category = rs.getString(4);//id
-				 String price = rs.getString(5);//id
-				 String contents = rs.getString(6);//id
-				 String photo = rs.getString(7);//id
-				 String sale = rs.getString(8);//id
-				 String itemnum = rs.getString(9);//id
-				 String itemcode = rs.getString(10);//id
-				 String seatok = rs.getString(11);//id
-				 dto2 = new PlaceMemberDTO();// if 있을때만 공간을 생성해주기에 . 효율적이고 합당함.
+				 String seatnum = rs.getString(2);//id
+				 dto2 = new PlaceMemberDTO2_test();// if 있을때만 공간을 생성해주기에 . 효율적이고 합당함.
 				 dto2.setId(id);
-				 dto2.setSeatdayno(seatdayno);
-				 dto2.setTitle(title);
-				 dto2.setCategory(category); 
-				 dto2.setPrice(price);
-				 dto2.setContents(contents);
-				 dto2.setPhoto(photo);
-				 dto2.setSale(sale);
-				 dto2.setItemnum(itemnum);
-				 dto2.setItemcode(itemcode);
-				 dto2.setSeatok(seatok);
+				 dto2.setSeatnum(seatnum);
 				 list.add(dto2);
 			}
 			mgr.freeConnection(con, ps, rs);
@@ -132,15 +145,15 @@ public class MemberDAO { //메서드 단위로 만듬.
 	
 	
 	
-	public int idOver(PlaceMemberDTO dto) {//id중복체크
+	public int sellplacecheck( String id) {//id중복체크
 		int result = 0; // 없다
-	 System.out.println("로그인 처리");
+	 System.out.println("member테이블에 sellplace를 검색");
 	 	try {// 
 	 		con = mgr.getConnection();
 				// 3 sql문 결정
-				String sql = "select id from place where seatok = ?";
+				String sql = "select sellplace from member where id = ?";
 				PreparedStatement ps = con.prepareStatement(sql);
-				ps.setString(1, dto.getSeatok());
+				ps.setString(1, id);
 				
 				// 4 sql문 전송
 				ResultSet rs = ps.executeQuery();
@@ -150,7 +163,7 @@ public class MemberDAO { //메서드 단위로 만듬.
 					System.out.println("검색결과있음");
 					result = 1;
 				}
-				mgr.freeConnection(con, ps);
+				mgr.freeConnection(con, ps, rs);
 			} catch (Exception e) {//예외.  
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -213,18 +226,18 @@ public class MemberDAO { //메서드 단위로 만듬.
 	
 	
 //	0.회원정보수정
-	public ArrayList<String> update() {
-		ArrayList<String> list = new ArrayList<String>();
+	public MemberDTO update( MemberDTO dto) {
+		MemberDTO dto2 = null;
 		System.out.println("예약을 취소하다");
 		try {
 			con = mgr.getConnection();
 			
-			String f = "1";
-			
 			// 3 sql문 결정
-			String sql = "update place set seatnum1 ='0' where seatnum1 = ?";
+			String sql = "update place set ? = '0'  where ?  = ? ";
+			// 넘어온 id값을  1번행을 전체 검색 후 있을시에  0으로 수정.
+			
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, f); //?를 받아줌.
+			ps.setString(1, dto.getId()); //?를 받아줌.
 			// 전송 △
 			System.out.println("3.sql문 결정 ok");
 			
@@ -237,16 +250,12 @@ public class MemberDAO { //메서드 단위로 만듬.
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return list;
+		return dto2;
 	}
 	
 	
 
 	
-private void setString(int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 

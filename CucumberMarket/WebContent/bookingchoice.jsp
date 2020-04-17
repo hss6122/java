@@ -1,4 +1,3 @@
-<%@page import="java.io.Console"%>
 <%@page import="javafx.scene.control.Alert"%>
 <%@page import="bean.PlaceMemberDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,39 +10,50 @@
 <meta charset="UTF-8">
 <title>오프라인 장터 자리 예약.</title>
 
- <script type="text/javascript">
- function showPopup_T() {window.open("popup_T.jsp", "a", "width=400, height=300, left=100, top=50"); }
- function showPopup_F() {window.open("popup_F.jsp", "a", "width=400, height=300, left=100, top=50"); }
- </script>
-<link rel="stylesheet" type="text/css" href="./css/shop.css">
+<link rel="stylesheet" type="text/css" href="css/shop.css">
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script> 
+<script type="text/javascript">
+ function showPopup_booking() {window.open("popup_booking.jsp", "a", "width=400, height=300, left=100, top=50"); }
+ function showPopup_cancel() {window.open("popup_cancel.jsp", "a", "width=400, height=300, left=100, top=50"); }
+</script>
 </head>
 <body>
-	<div id="total">배경이미지
-	
-	</div>
+	<div id="total">배경이미지</div>
 	<%
 	MemberDAO dao = new MemberDAO();
 	ArrayList<String> list = dao.seatcheck();
 	String seat = (String)list.get(0);
 	String[] seatlist = seat.split("#");
+	//out.print(seatlist[1]);
+	//out.print(seatlist);// 주소값 타입으로 저장되어 있음
+	
+	String id = "abc";
 	%>
 	<table border="1">
 	<tr>
 	<%
 	for(int i = 1 ; i < 6; i++){
 		
-		if(seatlist[i].equals("1")){
+		if(seatlist[i].equals("1")){// 첫번째 조건 장터 자리 예약 유무 확인
 		%>
-			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();">
-			 <%= i  %> <%= ": 번자리" %> 예약불가</td>
-			 
-			<% 
+		<td><input type="button" style="background-color: green;" >
+	    <%= i  %> <%= ": 번자리" %> 예약가능</td>
+		<% 
 		}else{
-			%>
-			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();">
-			 <%= i %> <%= ": 번자리" %> 예약가능 </td>
+		%>	
+		<% 
+		if(seatlist[i].equals(id)){ // 두번째 조건 > 예약한 사용자의 예약 취소조건
+		%>
+		<td><input type="button" style="background-color: yellow;" onclick="showPopup_cancel()">예약취소하기 </td>		
+		<% 
+		}
+		else{
+		%>	
+		<td><input type="button" style="background-color: red;" >
+		<%= i %> <%= ": 번자리" %> 예약불가 </td>
 			
 			<%
+			}
 			}
 			}
 			%>
@@ -54,13 +64,13 @@
 		
 		if(seatlist[i].equals("1")){
 		%>
-			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();"> 
-			<%= i  %> <%= ": 번자리" %> 예약불가</td>
+			<td><input type="button" style="background-color: green;"> 
+			<%= i  %> <%= ": 번자리" %> 예약가능</td>
 			<% 
 		}else{
 			%>
-			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();">
-			<%= i %> <%= ": 번자리" %> 예약가능 </td>
+			<td><input type="button" style="background-color: red; ">
+			<%= i %> <%= ": 번자리" %> 예약불가 </td>
 			<%
 			}
 			}
@@ -72,13 +82,13 @@
 		
 		if(seatlist[i].equals("1")){
 		%>
-			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();">
-			 <%= i  %> <%= ": 번자리" %> 예약불가</td>
+			<td><input type="button" style="background-color: green;" >
+			 <%= i  %> <%= ": 번자리" %> 예약가능</td>
 			<% 
 		}else{
 			%>
-			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();">
-			 <%= i %> <%= ": 번자리" %> 예약가능 </td>
+			<td><input type="button" style="background-color: red" >
+			 <%= i %> <%= ": 번자리" %> 예약불가 </td>
 			<%
 			}
 			}
@@ -90,13 +100,13 @@
 		
 		if(seatlist[i].equals("1")){
 		%>
-			<td><input type="submit" style="background-color: red" id="" onclick="showPopup_F();"> 
-			<%= i  %> <%= ": 번자리" %> 예약불가</td>
+			<td><input type="button" style="background-color: green;" > 
+			<%= i  %> <%= ": 번자리" %> 예약가능</td>
 			<% 
 		}else{
 			%>
-			<td><input type="submit" style="background-color: green" id="" onclick="showPopup_T();"> 
-			<%= i %> <%= ": 번자리" %> 예약가능 </td>
+			<td><input type="button" style="background-color: red;" > 
+			<%= i %> <%= ": 번자리" %> 예약불가 </td>
 			<%
 			}
 			}
