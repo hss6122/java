@@ -10,6 +10,7 @@ public class SellerMemberDTO {
 	String sale;
 	String itemnum;
 	String itemcode;
+	String seatok;
 	public String getId() {
 		return id;
 	}
@@ -64,12 +65,21 @@ public class SellerMemberDTO {
 	public void setItemcode(String itemcode) {
 		this.itemcode = itemcode;
 	}
+	public String getSeatok() {
+		return seatok;
+	}
+	public void setSeatok(String seatok) {
+		this.seatok = seatok;
+	}
 	@Override
 	public String toString() {
 		return "SellerMemberDTO [id=" + id + ", title=" + title + ", category=" + category + ", price=" + price
 				+ ", contents=" + contents + ", photo=" + photo + ", sale=" + sale + ", itemnum=" + itemnum
-				+ ", itemcode=" + itemcode + "]";
+				+ ", itemcode=" + itemcode + ", seatok=" + seatok + "]";
 	}
+	
+	
+	
 	
 
 }

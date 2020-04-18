@@ -21,6 +21,6 @@
 String id = request.getParameter("id");
 dto.setId(id);
 MemberDAO dao = new MemberDAO();
-dao.cancel(dto);
+dao.booking(dto);
 %>
 sql문 전송함.

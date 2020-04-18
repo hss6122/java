@@ -14,15 +14,15 @@
 	$(function() {
 
 		$('#b4').click(function() {
-			opener.location.href = "bookingchoice.jsp";
+			opener.location.href = "bookingchoice2_test.jsp";
 			self.close();//닫기 함수 호출
 		})//버튼 3
 		//---------------------------------------
 		$("#b3").click(function() {
 			idValue = $(this).attr('value')//id로 선언된 태그의 값을 가져올 수 있다.
-
+			console.log(idValue)
+			alert(idValue)
 			$.ajax({
-
 				url : "db1.jsp",
 				data : {
 					id : idValue
@@ -38,7 +38,7 @@
 </head>
 <body>
 
-	<button type="button" id="b3" class="cancel" value="abc">예약취소</button>
+	<button type="button" id="b3" class="cancel" value="<%= request.getParameter("id")%>">예약취소</button>
 	<!-- 					▲로그인세션으로 대체	 -->
 	<input type="button" id="b4" value="닫기">
 
