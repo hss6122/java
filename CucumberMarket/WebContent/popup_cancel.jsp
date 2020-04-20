@@ -23,7 +23,7 @@
 			console.log(idValue)
 			alert(idValue)
 			$.ajax({
-				url : "db1.jsp",
+				url : "Cancel_db.jsp",
 				data : {
 					id : idValue
 				},

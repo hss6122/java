@@ -20,7 +20,7 @@
 			console.log(idValue)
 			alert(idValue)
 			$.ajax({
-				url : "bookingdb.jsp",
+				url : "booking_db.jsp",
 				data : {
 					id : idValue
 				},
